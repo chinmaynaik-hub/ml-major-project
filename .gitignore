@@ -2,3 +2,4 @@ major_project-venv/
 __pycache__/
 *.pyc
 .env
+yoga_ai_trainer/backend/data/raw/yoga_poses/dataset

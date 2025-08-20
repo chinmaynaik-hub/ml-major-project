@@ -1,0 +1,6 @@
+Yoga Pose Image Classification Dataset
+==================================================
+Source: shrutisaxena/yoga-pose-image-classification-dataset
+Downloaded to: /home/chinmay/.cache/kagglehub/datasets/shrutisaxena/yoga-pose-image-classification-dataset/versions/1
+Organized in: yoga_ai_trainer/backend/data/raw/yoga_poses
+Download date: Wed Aug 20 10:09:59 PM IST 2025

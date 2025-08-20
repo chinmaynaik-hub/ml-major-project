@@ -1,12 +1,8 @@
 """
-AI Yoga Trainer - Small Dataset Pose Classifier
+Yoga AI Trainer - Pose Classifier for Sanskrit Named Poses
 
-This module demonstrates how to train effective pose classification 
-with just 100 images per pose using MediaPipe features.
-
-KEY INSIGHT: We're not doing raw image classification!
-We're classifying 44-dimensional feature vectors extracted from poses.
-This requires much less data than CNN image classification.
+This module provides pose classification for the yoga pose dataset
+with traditional Sanskrit names and English pronunciation support.
 """
 
 import numpy as np
@@ -20,35 +16,38 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 import cv2
 import os
-from typing import Dict, List, Tuple
-from pose_detector import PoseDetector
+from typing import Dict, List, Tuple, Optional
+import mediapipe as mp
 import json
+from pathlib import Path
 
-class SmallDatasetPoseClassifier:
+class YogaPoseClassifier:
     """
-    Pose classifier optimized for small datasets (100 images per pose).
+    Simplified Yoga Pose Classifier for Sanskrit named poses.
     
-    STRATEGY:
-    1. Use MediaPipe feature extraction (not raw images)
-    2. Apply data augmentation
-    3. Use ensemble methods (Random Forest)
-    4. Cross-validation for robust evaluation
+    For now, this provides basic functionality to support the API.
+    The actual model training will be implemented once we set up the complete pipeline.
     """
     
     def __init__(self):
-        self.pose_detector = PoseDetector()
+        # Initialize MediaPipe pose detection
+        self.mp_pose = mp.solutions.pose
+        self.pose = self.mp_pose.Pose(
+            model_complexity=1,
+            min_detection_confidence=0.5,
+            min_tracking_confidence=0.5
+        )
+        
         self.scaler = StandardScaler()
         self.classifier = None
-        self.pose_names = []
         
-        # Sanskrit to English mapping
-        self.asana_mapping = {
-            'tadasana': 'ताड़ासन',
-            'vrikshasana': 'वृक्षासन', 
-            'trikonasana': 'त्रिकोणासन',
-            'bhujangasana': 'भुजंगासन',
-            'balasana': 'बालासन'
-        }
+        # Load pose names from dataset
+        self.pose_names = self._load_pose_names_from_dataset()
+        
+        # Simplified demo mapping for testing
+        self.demo_poses = [
+            "tadasana", "vriksasana", "uttanasana", "balasana", "bhujangasana"
+        ]
     
     def prepare_dataset_from_images(self, dataset_path: str) -> Tuple[np.ndarray, np.ndarray]:
         """
