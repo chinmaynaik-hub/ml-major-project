@@ -8,7 +8,7 @@ import os
 import cv2
 import numpy as np
 import mediapipe as mp
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
@@ -22,8 +22,18 @@ import logging
 from pathlib import Path
 
 # Import our custom modules
-from utils.sanskrit_pronunciation import get_pose_pronunciation, generate_voice_text
-from models.pose_classifier_small import YogaPoseClassifier
+try:
+    # Try relative imports first (when running from backend directory)
+    from utils.sanskrit_pronunciation import get_pose_pronunciation, generate_voice_text
+    from models.pose_classifier_small import YogaPoseClassifier
+except ImportError:
+    # Use absolute imports (when running from project root)
+    import sys
+    import os
+    backend_path = os.path.dirname(os.path.abspath(__file__))
+    sys.path.insert(0, backend_path)
+    from utils.sanskrit_pronunciation import get_pose_pronunciation, generate_voice_text
+    from models.pose_classifier_small import YogaPoseClassifier
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -223,6 +233,81 @@ async def test_pronunciation(pose_name: str):
             "status": "success"
         }
     except Exception as e:
+        return {"error": str(e), "status": "error"}
+
+@app.post("/detect-pose")
+async def detect_pose_from_image(file: UploadFile = File(...)):
+    """Detect pose from uploaded image file"""
+    try:
+        # Read the uploaded image
+        image_data = await file.read()
+        
+        # Convert to OpenCV format
+        nparr = np.frombuffer(image_data, np.uint8)
+        frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        
+        if frame is None:
+            return {"error": "Invalid image format", "status": "error"}
+        
+        # Process the frame
+        annotated_frame, detected_pose, landmarks = detect_pose_from_frame(frame)
+        
+        # Prepare response
+        response = {
+            "status": "success",
+            "pose_detected": landmarks is not None,
+            "detected_pose": detected_pose,
+            "filename": file.filename
+        }
+        
+        if detected_pose:
+            pronunciation = get_pose_pronunciation(detected_pose)
+            response["pronunciation"] = pronunciation
+            response["voice_text"] = generate_voice_text(detected_pose)
+        
+        # Optionally encode annotated frame back to base64
+        if landmarks is not None:
+            _, buffer = cv2.imencode('.jpg', annotated_frame)
+            img_str = base64.b64encode(buffer).decode()
+            response["annotated_image"] = f"data:image/jpeg;base64,{img_str}"
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Error in pose detection: {e}")
+        return {"error": str(e), "status": "error"}
+
+@app.post("/detect-pose-base64")
+async def detect_pose_from_base64(image_data: str = Form(...)):
+    """Detect pose from base64 encoded image"""
+    try:
+        # Decode base64 image
+        if "," in image_data:
+            image_data = image_data.split(",")[1]
+        
+        image_bytes = base64.b64decode(image_data)
+        image = Image.open(BytesIO(image_bytes))
+        frame = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+        
+        # Process the frame
+        annotated_frame, detected_pose, landmarks = detect_pose_from_frame(frame)
+        
+        # Prepare response
+        response = {
+            "status": "success",
+            "pose_detected": landmarks is not None,
+            "detected_pose": detected_pose
+        }
+        
+        if detected_pose:
+            pronunciation = get_pose_pronunciation(detected_pose)
+            response["pronunciation"] = pronunciation
+            response["voice_text"] = generate_voice_text(detected_pose)
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Error in pose detection: {e}")
         return {"error": str(e), "status": "error"}
 
 @app.get("/health")

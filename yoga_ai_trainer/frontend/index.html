@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧘‍♀️ Yoga AI Trainer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .video-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        #videoElement {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .stop-btn {
+            background: linear-gradient(45deg, #f44336, #da190b) !important;
+        }
+        
+        .info-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .pose-info {
+            margin-bottom: 25px;
+        }
+        
+        .pose-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        
+        .pose-pronunciation {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        
+        .pose-confidence {
+            font-size: 1em;
+            padding: 8px 16px;
+            background: rgba(76, 175, 80, 0.3);
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .status.connecting {
+            background: rgba(255, 193, 7, 0.3);
+            border: 1px solid rgba(255, 193, 7, 0.5);
+        }
+        
+        .status.connected {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+        
+        .status.error {
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+        
+        .features {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .connection-info {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🧘‍♀️</div>
+            <h1>Yoga AI Trainer</h1>
+            <p class="subtitle">Real-time pose detection with traditional Sanskrit guidance</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="video-section">
+                <h2>📹 Live Pose Detection</h2>
+                <div class="video-container">
+                    <video id="videoElement" autoplay muted playsinline></video>
+                </div>
+                <div class="controls">
+                    <button id="startBtn" onclick="startCamera()">Start Camera</button>
+                    <button id="stopBtn" onclick="stopCamera()" class="stop-btn" disabled>Stop Camera</button>
+                </div>
+                <div id="status" class="status connecting" style="display: none;">
+                    Connecting to camera...
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2>🕉️ Pose Information</h2>
+                <div id="poseInfo" class="pose-info">
+                    <div class="pose-name">Ready to detect poses</div>
+                    <div class="pose-pronunciation">Start your camera to begin</div>
+                </div>
+                
+                <div class="connection-info">
+                    <h3>🔗 Backend Connection</h3>
+                    <div id="backendStatus">Testing connection...</div>
+                </div>
+                
+                <h3>✨ Features</h3>
+                <ul class="features">
+                    <li>Real-time pose detection using MediaPipe</li>
+                    <li>Traditional Sanskrit pose names</li>
+                    <li>Phonetic pronunciation guide</li>
+                    <li>Live confidence scoring</li>
+                    <li>WebSocket-based communication</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let video;
+        let websocket;
+        let isStreaming = false;
+        let animationId;
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            video = document.getElementById('videoElement');
+            testBackendConnection();
+        });
+
+        async function testBackendConnection() {
+            const statusElement = document.getElementById('backendStatus');
+            try {
+                const response = await fetch('http://localhost:8000/');
+                const data = await response.json();
+                
+                if (data.status === 'healthy') {
+                    statusElement.innerHTML = '✅ Backend server is running';
+                    statusElement.style.color = '#4CAF50';
+                } else {
+                    throw new Error('Unhealthy response');
+                }
+            } catch (error) {
+                statusElement.innerHTML = '❌ Backend server not accessible. Please start the backend server.';
+                statusElement.style.color = '#f44336';
+            }
+        }
+
+        async function startCamera() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.style.display = 'block';
+            statusDiv.textContent = 'Requesting camera access...';
+            statusDiv.className = 'status connecting';
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 640 },
+                        height: { ideal: 480 },
+                        facingMode: 'user'
+                    }
+                });
+
+                video.srcObject = stream;
+                video.play();
+
+                statusDiv.textContent = '✅ Camera connected! Connecting to AI backend...';
+                statusDiv.className = 'status connected';
+
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('stopBtn').disabled = false;
+                
+                isStreaming = true;
+                connectWebSocket();
+                
+                // Start sending frames after a short delay
+                setTimeout(startProcessing, 1000);
+
+            } catch (error) {
+                statusDiv.textContent = `❌ Camera access denied: ${error.message}`;
+                statusDiv.className = 'status error';
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        function stopCamera() {
+            const statusDiv = document.getElementById('status');
+            
+            if (video.srcObject) {
+                const tracks = video.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+                video.srcObject = null;
+            }
+
+            if (websocket) {
+                websocket.close();
+                websocket = null;
+            }
+
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+
+            isStreaming = false;
+            statusDiv.style.display = 'none';
+            
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+            
+            updatePoseInfo('Ready to detect poses', 'Start your camera to begin');
+        }
+
+        function connectWebSocket() {
+            try {
+                websocket = new WebSocket('ws://localhost:8000/ws/pose-detection');
+                
+                websocket.onopen = function(event) {
+                    console.log('WebSocket connected');
+                    const statusDiv = document.getElementById('status');
+                    statusDiv.textContent = '🚀 AI connection established! Detecting poses...';
+                };
+
+                websocket.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    handlePoseDetection(data);
+                };
+
+                websocket.onclose = function(event) {
+                    console.log('WebSocket disconnected');
+                    if (isStreaming) {
+                        setTimeout(connectWebSocket, 2000); // Reconnect after 2 seconds
+                    }
+                };
+
+                websocket.onerror = function(error) {
+                    console.error('WebSocket error:', error);
+                    const statusDiv = document.getElementById('status');
+                    statusDiv.textContent = '❌ Connection to AI server failed';
+                    statusDiv.className = 'status error';
+                };
+
+            } catch (error) {
+                console.error('WebSocket connection failed:', error);
+            }
+        }
+
+        function startProcessing() {
+            if (!isStreaming || !websocket || websocket.readyState !== WebSocket.OPEN) {
+                if (isStreaming) {
+                    animationId = requestAnimationFrame(startProcessing);
+                }
+                return;
+            }
+
+            // Capture frame from video
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+            
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Convert to base64 and send
+            const imageData = canvas.toDataURL('image/jpeg', 0.8);
+            
+            const message = {
+                type: 'frame',
+                data: imageData,
+                timestamp: Date.now()
+            };
+            
+            if (websocket.readyState === WebSocket.OPEN) {
+                websocket.send(JSON.stringify(message));
+            }
+            
+            // Schedule next frame (limit to ~10 FPS to reduce load)
+            setTimeout(() => {
+                if (isStreaming) {
+                    animationId = requestAnimationFrame(startProcessing);
+                }
+            }, 100);
+        }
+
+        function handlePoseDetection(data) {
+            if (data.type === 'pose_detection') {
+                if (data.detected_pose && data.pronunciation) {
+                    updatePoseInfo(
+                        data.detected_pose,
+                        data.pronunciation,
+                        data.voice_text
+                    );
+                } else if (data.has_landmarks) {
+                    updatePoseInfo('Pose detected', 'Analyzing pose...', 'Hold the position steady');
+                } else {
+                    updatePoseInfo('No pose detected', 'Stand in front of the camera', 'Make sure you are fully visible');
+                }
+            } else if (data.type === 'error') {
+                console.error('Pose detection error:', data.message);
+                const statusDiv = document.getElementById('status');
+                statusDiv.textContent = `❌ Detection error: ${data.message}`;
+                statusDiv.className = 'status error';
+            }
+        }
+
+        function updatePoseInfo(poseName, pronunciation, guidance) {
+            const poseInfo = document.getElementById('poseInfo');
+            
+            let confidence = '';
+            if (guidance && guidance.includes('confidence')) {
+                confidence = `<div class="pose-confidence">High Confidence</div>`;
+            }
+            
+            poseInfo.innerHTML = `
+                <div class="pose-name">${poseName}</div>
+                <div class="pose-pronunciation">${pronunciation}</div>
+                ${confidence}
+                ${guidance ? `<div style="margin-top: 10px; font-style: italic; opacity: 0.8;">${guidance}</div>` : ''}
+            `;
+        }
+
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && isStreaming) {
+                // Pause processing when tab is hidden
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+            } else if (!document.hidden && isStreaming) {
+                // Resume processing when tab is visible
+                startProcessing();
+            }
+        });
+    </script>
+</body>
+</html>
