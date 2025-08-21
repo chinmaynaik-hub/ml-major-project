@@ -99,3 +99,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Traditional yoga practices and Sanskrit terminology
 - MediaPipe team for pose estimation
 - Open source yoga community
+
+## Instruction 
+
+- run the data extractor program to download the data in the yoga_ai_trainer/backend/data folder
