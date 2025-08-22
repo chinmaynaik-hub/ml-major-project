@@ -26,6 +26,7 @@ try:
     # Try relative imports first (when running from backend directory)
     from utils.sanskrit_pronunciation import get_pose_pronunciation, generate_voice_text
     from models.pose_classifier_small import YogaPoseClassifier
+    from utils.pose_accuracy import YogaPoseValidator
 except ImportError:
     # Use absolute imports (when running from project root)
     import sys
@@ -34,6 +35,7 @@ except ImportError:
     sys.path.insert(0, backend_path)
     from utils.sanskrit_pronunciation import get_pose_pronunciation, generate_voice_text
     from models.pose_classifier_small import YogaPoseClassifier
+    from utils.pose_accuracy import YogaPoseValidator
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -64,8 +66,9 @@ pose = mp_pose.Pose(
     min_tracking_confidence=0.5
 )
 
-# Initialize pose classifier
+# Initialize pose classifier and validator
 pose_classifier = YogaPoseClassifier()
+pose_validator = YogaPoseValidator()
 
 # Global connection manager for WebSockets
 class ConnectionManager:
@@ -137,7 +140,7 @@ def process_pose_landmarks(landmarks):
     return np.array(landmark_list)
 
 def detect_pose_from_frame(frame):
-    """Detect pose from camera frame using MediaPipe"""
+    """Detect pose from camera frame using advanced pose accuracy validation"""
     try:
         # Convert BGR to RGB
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -147,6 +150,8 @@ def detect_pose_from_frame(frame):
         
         # Draw landmarks on the frame
         annotated_frame = frame.copy()
+        pose_validation = None
+        
         if results.pose_landmarks:
             mp_drawing.draw_landmarks(
                 annotated_frame, 
@@ -154,19 +159,24 @@ def detect_pose_from_frame(frame):
                 mp_pose.POSE_CONNECTIONS
             )
             
-            # Extract landmarks for classification
+            # Extract landmarks for validation
             landmarks_array = process_pose_landmarks(results.pose_landmarks)
             
             if landmarks_array is not None:
-                # Classify the pose (placeholder - will implement actual classification)
-                detected_pose = pose_classifier.predict_pose(landmarks_array)
-                return annotated_frame, detected_pose, results.pose_landmarks
+                # Use advanced pose validation system
+                pose_validation = pose_validator.validate_pose(landmarks_array)
+                return annotated_frame, pose_validation, results.pose_landmarks
+        else:
+            # No person detected
+            pose_validation = pose_validator.validate_pose(None)
         
-        return annotated_frame, None, None
+        return annotated_frame, pose_validation, None
         
     except Exception as e:
         logger.error(f"Error in pose detection: {e}")
-        return frame, None, None
+        # Create error validation
+        pose_validation = pose_validator.validate_pose(None)
+        return frame, pose_validation, None
 
 @app.websocket("/ws/pose-detection")
 async def websocket_pose_detection(websocket: WebSocket):
@@ -186,21 +196,40 @@ async def websocket_pose_detection(websocket: WebSocket):
                 image = Image.open(BytesIO(image_data))
                 frame = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
                 
-                # Process the frame
-                annotated_frame, detected_pose, landmarks = detect_pose_from_frame(frame)
+                # Process the frame with advanced validation
+                annotated_frame, pose_validation, landmarks = detect_pose_from_frame(frame)
                 
-                # Prepare response
+                # Prepare comprehensive response
                 response = {
                     "type": "pose_detection",
                     "timestamp": message.get("timestamp"),
-                    "detected_pose": detected_pose,
-                    "has_landmarks": landmarks is not None
+                    "has_landmarks": landmarks is not None,
+                    "pose_validation": {
+                        "is_valid": pose_validation.is_valid,
+                        "accuracy_score": pose_validation.accuracy_score,
+                        "confidence": pose_validation.confidence,
+                        "pose_name": pose_validation.pose_name,
+                        "sanskrit_name": pose_validation.sanskrit_name,
+                        "issues": pose_validation.issues,
+                        "corrections": pose_validation.corrections,
+                        "similar_poses": pose_validation.similar_poses
+                    }
                 }
                 
-                if detected_pose:
-                    pronunciation = get_pose_pronunciation(detected_pose)
+                # Add pronunciation and voice feedback for valid poses
+                if pose_validation.is_valid and pose_validation.pose_name:
+                    pronunciation = get_pose_pronunciation(pose_validation.pose_name)
                     response["pronunciation"] = pronunciation
-                    response["voice_text"] = generate_voice_text(detected_pose)
+                    response["voice_text"] = generate_voice_text(pose_validation.pose_name)
+                    response["detected_pose"] = pose_validation.pose_name
+                elif not pose_validation.is_valid and pose_validation.similar_poses:
+                    # Provide guidance for invalid poses
+                    response["guidance"] = {
+                        "message": "Invalid posture detected",
+                        "suggestions": pose_validation.similar_poses,
+                        "corrections": pose_validation.corrections
+                    }
+                    response["detected_pose"] = None
                 
                 # Encode annotated frame back to base64
                 _, buffer = cv2.imencode('.jpg', annotated_frame)

@@ -422,16 +422,25 @@
 
         function handlePoseDetection(data) {
             if (data.type === 'pose_detection') {
-                if (data.detected_pose && data.pronunciation) {
+                const validation = data.pose_validation;
+                
+                if (validation.is_valid && validation.pose_name) {
+                    // Valid pose detected
                     updatePoseInfo(
-                        data.detected_pose,
-                        data.pronunciation,
-                        data.voice_text
+                        validation.sanskrit_name || validation.pose_name,
+                        data.pronunciation || 'Perfect pose!',
+                        data.voice_text || `Excellent! You're in ${validation.pose_name}`,
+                        validation.accuracy_score
                     );
+                } else if (!validation.is_valid && validation.similar_poses && validation.similar_poses.length > 0) {
+                    // Invalid pose with suggestions
+                    updateInvalidPoseInfo(validation);
                 } else if (data.has_landmarks) {
-                    updatePoseInfo('Pose detected', 'Analyzing pose...', 'Hold the position steady');
+                    // Person detected but pose unclear
+                    updatePoseInfo('Analyzing pose...', 'Hold position steady', 'Ensure you are fully visible in camera');
                 } else {
-                    updatePoseInfo('No pose detected', 'Stand in front of the camera', 'Make sure you are fully visible');
+                    // No person detected
+                    updatePoseInfo('No person detected', 'Step into camera view', 'Make sure you are fully visible from head to toe');
                 }
             } else if (data.type === 'error') {
                 console.error('Pose detection error:', data.message);
@@ -441,11 +450,15 @@
             }
         }
 
-        function updatePoseInfo(poseName, pronunciation, guidance) {
+        function updatePoseInfo(poseName, pronunciation, guidance, accuracy = null) {
             const poseInfo = document.getElementById('poseInfo');
             
             let confidence = '';
-            if (guidance && guidance.includes('confidence')) {
+            if (accuracy !== null) {
+                const percentage = Math.round(accuracy * 100);
+                const color = percentage >= 80 ? '#4CAF50' : percentage >= 60 ? '#FFA500' : '#f44336';
+                confidence = `<div class="pose-confidence" style="background: rgba(${color === '#4CAF50' ? '76, 175, 80' : color === '#FFA500' ? '255, 165, 0' : '244, 67, 54'}, 0.3);">${percentage}% Accuracy</div>`;
+            } else if (guidance && guidance.includes('confidence')) {
                 confidence = `<div class="pose-confidence">High Confidence</div>`;
             }
             
@@ -454,6 +467,63 @@
                 <div class="pose-pronunciation">${pronunciation}</div>
                 ${confidence}
                 ${guidance ? `<div style="margin-top: 10px; font-style: italic; opacity: 0.8;">${guidance}</div>` : ''}
+            `;
+        }
+        
+        function updateInvalidPoseInfo(validation) {
+            const poseInfo = document.getElementById('poseInfo');
+            
+            // Create invalid pose display with suggestions
+            let suggestionsHtml = '';
+            if (validation.similar_poses && validation.similar_poses.length > 0) {
+                suggestionsHtml = '<div style="margin-top: 20px;"><h4 style="color: #FFD700; margin-bottom: 10px;">💡 Try these poses instead:</h4>';
+                
+                validation.similar_poses.forEach(pose => {
+                    const similarityPercentage = Math.round(pose.similarity * 100);
+                    const difficultyStars = '⭐'.repeat(pose.difficulty || 1);
+                    
+                    suggestionsHtml += `
+                        <div style="
+                            background: rgba(255, 255, 255, 0.1); 
+                            padding: 12px; 
+                            margin-bottom: 8px; 
+                            border-radius: 8px; 
+                            border-left: 4px solid #4CAF50;
+                        ">
+                            <div style="font-weight: bold; color: #4CAF50;">${pose.sanskrit_name || pose.pose_name}</div>
+                            <div style="font-size: 0.9em; opacity: 0.8;">${pose.description || ''}</div>
+                            <div style="font-size: 0.8em; margin-top: 5px;">
+                                <span style="color: #FFD700;">Similarity: ${similarityPercentage}%</span>
+                                <span style="margin-left: 15px;">Difficulty: ${difficultyStars}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                suggestionsHtml += '</div>';
+            }
+            
+            // Create corrections list
+            let correctionsHtml = '';
+            if (validation.corrections && validation.corrections.length > 0) {
+                correctionsHtml = '<div style="margin-top: 15px;"><h4 style="color: #FFA500; margin-bottom: 8px;">🎯 Tips for improvement:</h4>';
+                
+                validation.corrections.slice(0, 3).forEach(correction => {
+                    correctionsHtml += `<div style="font-size: 0.9em; margin-bottom: 5px; opacity: 0.9;">• ${correction}</div>`;
+                });
+                
+                correctionsHtml += '</div>';
+            }
+            
+            poseInfo.innerHTML = `
+                <div class="pose-name" style="color: #f44336;">⚠️ Invalid Posture</div>
+                <div class="pose-pronunciation">Current position is not a recognized yoga pose</div>
+                <div style="margin-top: 10px; padding: 10px; background: rgba(244, 67, 54, 0.2); border-radius: 8px; border-left: 4px solid #f44336;">
+                    <div style="font-weight: bold; margin-bottom: 5px;">Issues detected:</div>
+                    ${validation.issues.slice(0, 2).map(issue => `<div style="font-size: 0.9em;">• ${issue}</div>`).join('')}
+                </div>
+                ${correctionsHtml}
+                ${suggestionsHtml}
             `;
         }
 
