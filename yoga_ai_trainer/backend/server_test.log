@@ -1,0 +1,63 @@
+2025-08-21 21:17:40.180335: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-08-21 21:17:40.186723: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-08-21 21:17:40.205941: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1755791260.237733   25441 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1755791260.247327   25441 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1755791260.272378   25441 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755791260.272439   25441 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755791260.272450   25441 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755791260.272457   25441 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-08-21 21:17:40.279811: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1755791265.367209   25441 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1755791265.373242   25530 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+I0000 00:00:1755791265.394530   25441 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1755791265.401294   25541 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:__main__:🧘‍♀️ Starting Yoga AI Trainer Backend...
+INFO:     Will watch for changes in these directories: ['/home/chinmay/coding-ubuntu/major_project/yoga_ai_trainer/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [25441] using StatReload
+W0000 00:00:1755791265.582074   25524 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791265.624584   25532 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791265.659822   25521 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791265.677342   25534 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+2025-08-21 21:17:46.862951: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1755791266.896650   25543 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1755791266.907156   25543 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1755791266.932112   25543 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755791266.932168   25543 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755791266.932185   25543 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755791266.932199   25543 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1755791271.970665   25543 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1755791271.976583   25604 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+I0000 00:00:1755791271.999549   25543 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1755791272.005990   25615 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+I0000 00:00:1755791272.077602   25543 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1755791272.082712   25626 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+I0000 00:00:1755791272.104167   25543 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1755791272.110904   25637 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:     Started server process [25543]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+W0000 00:00:1755791272.146763   25598 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791272.184184   25607 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791272.205603   25594 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791272.234673   25609 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791272.268068   25620 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791272.287702   25629 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791272.318161   25617 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1755791272.332368   25630 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO:     127.0.0.1:57562 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37556 - "GET /poses HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59294 - "GET /test-pronunciation/tadasana HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [25543]
+INFO:     Stopping reloader process [25441]

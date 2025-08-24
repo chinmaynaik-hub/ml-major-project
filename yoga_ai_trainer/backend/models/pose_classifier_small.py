@@ -21,18 +21,6 @@ import mediapipe as mp
 import json
 from pathlib import Path
 
-# Import our pose detection utility
-try:
-    from ..utils.pose_detector import PoseFeatureExtractor
-    from ..utils.sanskrit_pronunciation import get_all_pose_names
-except ImportError:
-    # For direct execution or testing
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-    from utils.pose_detector import PoseFeatureExtractor
-    from utils.sanskrit_pronunciation import get_all_pose_names
-
 class YogaPoseClassifier:
     """
     Simplified Yoga Pose Classifier for Sanskrit named poses.
@@ -42,22 +30,28 @@ class YogaPoseClassifier:
     """
     
     def __init__(self):
-        # Initialize pose feature extractor
-        self.pose_detector = PoseFeatureExtractor()
+        # Initialize MediaPipe pose detection
+        self.mp_pose = mp.solutions.pose
+        self.pose = self.mp_pose.Pose(
+            model_complexity=1,
+            min_detection_confidence=0.5,
+            min_tracking_confidence=0.5
+        )
         
         self.scaler = StandardScaler()
         self.classifier = None
         
-        # Load pose names from dataset or use demo poses
+        # Load pose names from dataset
         self.pose_names = self._load_pose_names_from_dataset()
         
-        # Create asana mapping (Sanskrit to English)
-        self.asana_mapping = self._create_asana_mapping()
-        
-        # Simplified demo poses for testing
+        # Simplified demo mapping for testing
         self.demo_poses = [
             "tadasana", "vriksasana", "uttanasana", "balasana", "bhujangasana"
         ]
+    
+    def _load_pose_names_from_dataset(self) -> List[str]:
+        """Placeholder to load pose names. For now, uses demo_poses."""
+        return self.demo_poses
     
     def prepare_dataset_from_images(self, dataset_path: str) -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -171,8 +165,7 @@ class YogaPoseClassifier:
         
         ALGORITHM CHOICE:
         - Random Forest: Works well with small datasets, handles overfitting
-        - Alternative: SVM with RBF kernel for non-linear boundaries
-        
+        - Alternative: SVM with RBF kernel for non-linear boundaries (support vector machine)
         Args:
             X: Feature vectors
             y: Labels
@@ -328,68 +321,8 @@ class YogaPoseClassifier:
         self.classifier = model_data['classifier']
         self.scaler = model_data['scaler']
         self.pose_names = model_data['pose_names']
-        self.asana_mapping = model_data.get('asana_mapping', self._create_asana_mapping())
+        self.asana_mapping = model_data['asana_mapping']
         print(f"Model loaded from {filepath}")
-    
-    def _load_pose_names_from_dataset(self) -> List[str]:
-        """Load pose names from dataset or return default poses."""
-        try:
-            # Try to load from Sanskrit pronunciation mappings
-            all_poses = get_all_pose_names()
-            if all_poses:
-                return all_poses[:10]  # Use first 10 poses for demo
-        except ImportError:
-            pass
-        
-        # Default demo poses if no dataset available
-        return self.demo_poses
-    
-    def _create_asana_mapping(self) -> Dict[str, str]:
-        """Create mapping from English to Sanskrit pose names."""
-        # Basic mapping for demo poses
-        mapping = {
-            'tadasana': 'ताड़ासन (Tadasana - Mountain Pose)',
-            'vriksasana': 'वृक्षासन (Vrikshasana - Tree Pose)', 
-            'uttanasana': 'उत्तानासन (Uttanasana - Standing Forward Fold)',
-            'balasana': 'बालासन (Balasana - Child\'s Pose)',
-            'bhujangasana': 'भुजंगासन (Bhujangasana - Cobra Pose)'
-        }
-        
-        # Add all poses from our pose names
-        for pose_name in self.pose_names:
-            if pose_name not in mapping:
-                # Convert pose name to title case for display
-                mapping[pose_name] = pose_name.replace('_', ' ').title()
-        
-        return mapping
-    
-    def get_pose_names(self) -> List[str]:
-        """Get all available pose names."""
-        return self.pose_names
-    
-    def predict_pose(self, landmarks_array: np.ndarray) -> Optional[str]:
-        """Simple prediction method for basic pose detection."""
-        if self.classifier is None:
-            # Return random demo pose for testing when no model is trained
-            import random
-            return random.choice(self.demo_poses)
-        
-        try:
-            # Scale features
-            features_scaled = self.scaler.transform(landmarks_array.reshape(1, -1))
-            
-            # Make prediction
-            prediction_idx = self.classifier.predict(features_scaled)[0]
-            confidence = np.max(self.classifier.predict_proba(features_scaled))
-            
-            # Return pose name if confidence is high enough
-            if confidence > 0.6:
-                return self.pose_names[prediction_idx]
-            
-        except Exception as e:
-            print(f"Prediction error: {e}")
-        
-        return None
 
 
 # PRACTICAL EXAMPLE USAGE

@@ -1,0 +1,567 @@
+{
+  "pose_names": [
+    "chaturanga dandasana",
+    "ardha matsyendrasana",
+    "ustrasana",
+    "bitilasana",
+    "garudasana",
+    "bakasana",
+    "vasisthasana",
+    "bhujangasana",
+    "utkatasana",
+    "astavakrasana",
+    "gomukhasana",
+    "natarajasana"
+  ],
+  "training_date": "2025-08-24 11:56:36",
+  "dataset_stats": {
+    "all_poses": {
+      "padmasana": 68,
+      "bhairavasana": 46,
+      "garbha pindasana": 36,
+      "eka pada rajakapotasana ii": 55,
+      "virasana": 50,
+      "chakravakasana": 70,
+      "chaturanga dandasana": 90,
+      "vasisthasana": 74,
+      "parsvottanasana": 35,
+      "salamba bhujangasana": 55,
+      "eka pada koundinyanasana i": 51,
+      "uttanasana": 63,
+      "savasana": 57,
+      "paripurna navasana": 68,
+      "ganda bherundasana": 39,
+      "bakasana": 77,
+      "dhanurasana": 46,
+      "dandasana": 60,
+      "urdhva dhanurasana": 68,
+      "ardha matsyendrasana": 90,
+      "marjaryasana": 46,
+      "urdhva hastasana": 47,
+      "paschimottanasana": 56,
+      "vriksasana": 62,
+      "bhekasana": 39,
+      "eka pada rajakapotasana": 44,
+      "simhasana": 49,
+      "utthita ashwa sanchalanasana": 38,
+      "mayurasana": 51,
+      "uttana shishosana": 50,
+      "astavakrasana": 72,
+      "yoganidrasana": 46,
+      "parivrtta trikonasana": 62,
+      "lolasana": 36,
+      "purvottanasana": 63,
+      "makara adho mukha svanasana": 43,
+      "camatkarasana": 54,
+      "marichyasana i": 49,
+      "supta virasana": 60,
+      "kapotasana": 57,
+      "balasana": 71,
+      "eka pada koundinyanasana ii": 58,
+      "agnistambhasana": 33,
+      "malasana": 68,
+      "anantasana": 43,
+      "baddha konasana": 70,
+      "supta baddha konasana": 71,
+      "parivrtta janu sirsasana": 39,
+      "viparita karani": 69,
+      "makarasana": 57,
+      "salamba sirsasana": 60,
+      "bhujangasana": 73,
+      "ardha pincha mayurasana": 47,
+      "utthita trikonasana": 69,
+      "upavistha konasana": 60,
+      "adho mukha svanasana": 69,
+      "kurmasana": 40,
+      "salabhasana": 58,
+      "prasarita padottanasana": 66,
+      "supta padangusthasana": 62,
+      "janu sirsasana": 48,
+      "urdhva prasarita eka padasana": 53,
+      "vajrasana": 54,
+      "virabhadrasana i": 54,
+      "gomukhasana": 72,
+      "bhujapidasana": 61,
+      "ashtanga namaskara": 33,
+      "utthita hasta padangustasana": 59,
+      "ananda balasana": 59,
+      "halasana": 66,
+      "tittibhasana": 57,
+      "trikonasana": 0,
+      "phalakasana": 57,
+      "tadasana": 56,
+      "garudasana": 78,
+      "krounchasana": 45,
+      "tulasana": 31,
+      "parsva bakasana": 56,
+      "pasasana": 56,
+      "marichyasana iii": 33,
+      "hanumanasana": 35,
+      "ustrasana": 87,
+      "natarajasana": 72,
+      "adho mukha vriksasana": 59,
+      "adho_mukha_svanasana": 0,
+      "bharadvajasana i": 54,
+      "anjaneyasana": 64,
+      "bitilasana": 87,
+      "ardha chandrasana": 52,
+      "sukhasana": 50,
+      "virabhadrasana ii": 55,
+      "supta matsyendrasana": 54,
+      "parighasana": 43,
+      "ardha uttanasana": 66,
+      "virabhadrasana iii": 61,
+      "utkatasana": 73,
+      "pincha mayurasana": 35,
+      "parivrtta parsvakonasana": 40,
+      "shavasana": 0,
+      "matsyasana": 57,
+      "durvasasana": 39,
+      "urdhva mukha svanasana": 63,
+      "utthita_hasta_padangusthasana": 0,
+      "ardha bhekasana": 40,
+      "salamba sarvangasana": 67,
+      "setu bandha sarvangasana": 58,
+      "tolasana": 60,
+      "utthita parsvakonasana": 63,
+      "dwi pada viparita dandasana": 55,
+      "parsvakonasana": 0,
+      "vrischikasana": 51,
+      "padangusthasana": 18
+    },
+    "suitable_poses": [
+      [
+        "chaturanga dandasana",
+        90
+      ],
+      [
+        "ardha matsyendrasana",
+        90
+      ],
+      [
+        "ustrasana",
+        87
+      ],
+      [
+        "bitilasana",
+        87
+      ],
+      [
+        "garudasana",
+        78
+      ],
+      [
+        "bakasana",
+        77
+      ],
+      [
+        "vasisthasana",
+        74
+      ],
+      [
+        "bhujangasana",
+        73
+      ],
+      [
+        "utkatasana",
+        73
+      ],
+      [
+        "astavakrasana",
+        72
+      ],
+      [
+        "gomukhasana",
+        72
+      ],
+      [
+        "natarajasana",
+        72
+      ],
+      [
+        "balasana",
+        71
+      ],
+      [
+        "supta baddha konasana",
+        71
+      ],
+      [
+        "chakravakasana",
+        70
+      ],
+      [
+        "baddha konasana",
+        70
+      ],
+      [
+        "viparita karani",
+        69
+      ],
+      [
+        "utthita trikonasana",
+        69
+      ],
+      [
+        "adho mukha svanasana",
+        69
+      ],
+      [
+        "padmasana",
+        68
+      ],
+      [
+        "paripurna navasana",
+        68
+      ],
+      [
+        "urdhva dhanurasana",
+        68
+      ],
+      [
+        "malasana",
+        68
+      ],
+      [
+        "salamba sarvangasana",
+        67
+      ],
+      [
+        "prasarita padottanasana",
+        66
+      ],
+      [
+        "halasana",
+        66
+      ],
+      [
+        "ardha uttanasana",
+        66
+      ],
+      [
+        "anjaneyasana",
+        64
+      ],
+      [
+        "uttanasana",
+        63
+      ],
+      [
+        "purvottanasana",
+        63
+      ],
+      [
+        "urdhva mukha svanasana",
+        63
+      ],
+      [
+        "utthita parsvakonasana",
+        63
+      ],
+      [
+        "vriksasana",
+        62
+      ],
+      [
+        "parivrtta trikonasana",
+        62
+      ],
+      [
+        "supta padangusthasana",
+        62
+      ],
+      [
+        "bhujapidasana",
+        61
+      ],
+      [
+        "virabhadrasana iii",
+        61
+      ],
+      [
+        "dandasana",
+        60
+      ],
+      [
+        "supta virasana",
+        60
+      ],
+      [
+        "salamba sirsasana",
+        60
+      ],
+      [
+        "upavistha konasana",
+        60
+      ],
+      [
+        "tolasana",
+        60
+      ],
+      [
+        "utthita hasta padangustasana",
+        59
+      ],
+      [
+        "ananda balasana",
+        59
+      ],
+      [
+        "adho mukha vriksasana",
+        59
+      ],
+      [
+        "eka pada koundinyanasana ii",
+        58
+      ],
+      [
+        "salabhasana",
+        58
+      ],
+      [
+        "setu bandha sarvangasana",
+        58
+      ],
+      [
+        "savasana",
+        57
+      ],
+      [
+        "kapotasana",
+        57
+      ],
+      [
+        "makarasana",
+        57
+      ],
+      [
+        "tittibhasana",
+        57
+      ],
+      [
+        "phalakasana",
+        57
+      ],
+      [
+        "matsyasana",
+        57
+      ],
+      [
+        "paschimottanasana",
+        56
+      ],
+      [
+        "tadasana",
+        56
+      ],
+      [
+        "parsva bakasana",
+        56
+      ],
+      [
+        "pasasana",
+        56
+      ],
+      [
+        "eka pada rajakapotasana ii",
+        55
+      ],
+      [
+        "salamba bhujangasana",
+        55
+      ],
+      [
+        "virabhadrasana ii",
+        55
+      ],
+      [
+        "dwi pada viparita dandasana",
+        55
+      ],
+      [
+        "camatkarasana",
+        54
+      ],
+      [
+        "vajrasana",
+        54
+      ],
+      [
+        "virabhadrasana i",
+        54
+      ],
+      [
+        "bharadvajasana i",
+        54
+      ],
+      [
+        "supta matsyendrasana",
+        54
+      ],
+      [
+        "urdhva prasarita eka padasana",
+        53
+      ],
+      [
+        "ardha chandrasana",
+        52
+      ],
+      [
+        "eka pada koundinyanasana i",
+        51
+      ],
+      [
+        "mayurasana",
+        51
+      ],
+      [
+        "vrischikasana",
+        51
+      ],
+      [
+        "virasana",
+        50
+      ],
+      [
+        "uttana shishosana",
+        50
+      ],
+      [
+        "sukhasana",
+        50
+      ],
+      [
+        "simhasana",
+        49
+      ],
+      [
+        "marichyasana i",
+        49
+      ],
+      [
+        "janu sirsasana",
+        48
+      ],
+      [
+        "urdhva hastasana",
+        47
+      ],
+      [
+        "ardha pincha mayurasana",
+        47
+      ],
+      [
+        "bhairavasana",
+        46
+      ],
+      [
+        "dhanurasana",
+        46
+      ],
+      [
+        "marjaryasana",
+        46
+      ],
+      [
+        "yoganidrasana",
+        46
+      ],
+      [
+        "krounchasana",
+        45
+      ],
+      [
+        "eka pada rajakapotasana",
+        44
+      ],
+      [
+        "makara adho mukha svanasana",
+        43
+      ],
+      [
+        "anantasana",
+        43
+      ],
+      [
+        "parighasana",
+        43
+      ],
+      [
+        "kurmasana",
+        40
+      ],
+      [
+        "parivrtta parsvakonasana",
+        40
+      ],
+      [
+        "ardha bhekasana",
+        40
+      ],
+      [
+        "ganda bherundasana",
+        39
+      ],
+      [
+        "bhekasana",
+        39
+      ],
+      [
+        "parivrtta janu sirsasana",
+        39
+      ],
+      [
+        "durvasasana",
+        39
+      ],
+      [
+        "utthita ashwa sanchalanasana",
+        38
+      ],
+      [
+        "garbha pindasana",
+        36
+      ],
+      [
+        "lolasana",
+        36
+      ],
+      [
+        "parsvottanasana",
+        35
+      ],
+      [
+        "hanumanasana",
+        35
+      ],
+      [
+        "pincha mayurasana",
+        35
+      ],
+      [
+        "agnistambhasana",
+        33
+      ],
+      [
+        "ashtanga namaskara",
+        33
+      ],
+      [
+        "marichyasana iii",
+        33
+      ],
+      [
+        "tulasana",
+        31
+      ]
+    ],
+    "total_poses": 112,
+    "trainable_poses": 106
+  },
+  "training_results": {
+    "accuracy": 0.9985486211901307,
+    "algorithm": "RandomForest",
+    "samples": 3444,
+    "classes": 12
+  }
+}

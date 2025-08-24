@@ -1,0 +1,97 @@
+nohup: ignoring input
+2025-08-24 11:38:31.595904: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-08-24 11:38:31.602550: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-08-24 11:38:31.622553: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1756015711.656832    7719 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1756015711.666704    7719 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1756015711.692881    7719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756015711.692935    7719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756015711.692951    7719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756015711.692963    7719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-08-24 11:38:31.700417: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1756015717.011540    7719 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756015717.017461    7823 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+I0000 00:00:1756015717.029177    7719 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756015717.034439    7834 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:utils.pose_accuracy:Initialized pose validator with 5 templates
+INFO:__main__:🧘‍♀️ Starting Yoga AI Trainer Backend...
+INFO:     Will watch for changes in these directories: ['/home/chinmay/coding-ubuntu/major_project/yoga_ai_trainer/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [7719] using StatReload
+W0000 00:00:1756015717.222765    7816 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015717.269232    7828 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015717.323985    7811 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015717.342104    7826 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+2025-08-24 11:38:38.529044: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1756015718.560990    7836 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1756015718.570704    7836 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1756015718.595750    7836 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756015718.595808    7836 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756015718.595826    7836 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756015718.595838    7836 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1756015723.894678    7836 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756015723.900540    7991 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+I0000 00:00:1756015723.912733    7836 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756015723.918099    8002 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:utils.pose_accuracy:Initialized pose validator with 5 templates
+I0000 00:00:1756015723.982862    7836 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756015723.987281    8013 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+I0000 00:00:1756015724.009218    7836 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756015724.014844    8024 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:utils.pose_accuracy:Initialized pose validator with 5 templates
+INFO:     Started server process [7836]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+W0000 00:00:1756015724.062711    7995 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015724.090632    7980 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015724.135553    7992 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015724.161576    8008 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015724.167932    8016 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015724.171548    7986 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015724.234851    8014 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756015724.238994    8004 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO:     127.0.0.1:40688 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45644 - "GET /health HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'utils/voice_feedback.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7836]
+2025-08-24 11:46:44.294194: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1756016204.326514    8577 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1756016204.336113    8577 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1756016204.360719    8577 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756016204.360776    8577 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756016204.360794    8577 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756016204.360808    8577 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1756016209.602797    8577 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756016209.608579    8621 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+I0000 00:00:1756016209.620344    8577 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756016209.625776    8632 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:utils.pose_accuracy:Initialized pose validator with 5 templates
+I0000 00:00:1756016209.705335    8577 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756016209.710290    8643 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+I0000 00:00:1756016209.734214    8577 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1756016209.739062    8654 gl_context.cc:369] GL version: 3.2 (OpenGL ES 3.2 Mesa 25.0.7-0ubuntu0.24.04.1), renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:utils.pose_accuracy:Initialized pose validator with 5 templates
+INFO:     Started server process [8577]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+W0000 00:00:1756016209.777585    8623 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756016209.777736    8612 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756016209.859269    8613 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756016209.860908    8625 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756016209.866890    8636 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756016209.867426    8647 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756016209.940368    8651 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1756016209.943451    8638 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
